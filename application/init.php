@@ -8,5 +8,7 @@ require_once 'core/Auth.php';
 require_once 'core/DatabaseFactory.php';
 
 require_once 'models/UserModel.php';
+require_once 'models/LoginModel.php';
+require_once 'models/RegisterModel.php';
 
 
