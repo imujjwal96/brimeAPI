@@ -4,7 +4,7 @@ class DatabaseFactory {
     private static $factory;
     private $database;
 
-    public static function getIndustry() {
+    public static function getFactory() {
         if (!self::$factory) {
             self::$factory = new DatabaseFactory();
         }
@@ -33,28 +33,5 @@ class DatabaseFactory {
             }
         }
         return $this->database;
-    }
-
-    public function query(/* $sql [, ... ] */) {
-        $sql = func_get_arg(0);
-        $parameters = array_slice(func_get_args(), 1);
-
-        $handle = $this->database;
-        // prepare SQL statement
-        $statement = $handle->prepare($sql);
-        if ($statement === false) {
-            // trigger (big, orange) error
-            trigger_error($handle->errorInfo()[2], E_USER_ERROR);
-            exit;
-        }
-        // execute SQL statement
-        $results = $statement->execute($parameters);
-        // return result set's rows, if any
-        if ($results !== false) {
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-        }
-        else {
-            return false;
-        }
     }
 }

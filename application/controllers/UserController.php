@@ -8,27 +8,34 @@ class UserController extends Controller {
 
     public function index() {
         if (Auth::content()["type"] == "Basic") {
-            echo Auth::content()["data"];
-        }
+            $authValue = explode(':', Auth::decrypt());
 
-
-       /* if (Auth::affirmative()) {
-            if (strcmp(Auth::type(), "basic")) {
-
+            $userInfo = UserModel::getUserByEmail($authValue[0]);
+            if ($userInfo != false) {
+                if (password_verify($authValue[1], $userInfo->password)) {
+                    $this->View->renderJSON(array(
+                        'id' => $userInfo->id,
+                        'email' => $userInfo->email,
+                        'firstName' => $userInfo->firstName,
+                        'lastName' => $userInfo->lastName,
+                        'birthDate' => $userInfo->birthDate
+                    ));
+                } else {
+                    $this->View->renderJSON(array(
+                        'message' => "Incorrect password"
+                    ));
+                }
+            } else {
+                $this->View->renderJSON(array(
+                    'message' => "No such user"
+                ));
             }
-            $authorization = explode(' ', getallheaders()["Authorization"]);
-            if (strcmp($authorization[0], "basic")) {
-                $basicAuth = explode(':', base64_decode($authorization[1]));
-            }
-        }*/
-        //Authorization: Basic aW11amp3YWw5NjpBdHVsX2JoYXI3MDI=
-       // $baseAuth = base64_decode();
-/*
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+
+        } else {
             $this->View->renderJSON(array(
                 'message' => "Requires Authentication"
             ));
-        }*/
+        }
     }
 
     public function notes($access="public") {

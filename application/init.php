@@ -5,5 +5,8 @@ require_once 'core/Application.php';
 require_once 'core/Controller.php';
 require_once 'core/View.php';
 require_once 'core/Auth.php';
+require_once 'core/DatabaseFactory.php';
+
+require_once 'models/UserModel.php';
 
 

@@ -20,9 +20,9 @@ class Auth {
     }
 
     public static function decrypt() {
-
+        $content = self::content();
+        if ($content["type"] == "Basic") {
+            return base64_decode($content["data"]);
+        }
     }
-
-
-
 }
