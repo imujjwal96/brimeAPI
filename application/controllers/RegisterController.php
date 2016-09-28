@@ -13,6 +13,7 @@ class RegisterController extends Controller {
             $password = strip_tags($_POST["password"]);
             $passwordRepeat = strip_tags($_POST["passwordRepeat"]);
             if (!RegisterModel::formValidation($userName, $email, $password, $passwordRepeat)) {
+                http_response_code(400);
                 $this->View->renderJSON(array(
                     'message' => 'Invalid Credentials'
                 ));
@@ -23,6 +24,7 @@ class RegisterController extends Controller {
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
                 if (RegisterModel::registerNewUser($userName, $email, $password, $passwordRepeat)) {
+                    http_response_code(200);
                     $message = 'Registered Successfully';
                 } else {
                     $message = 'Error with the database.';

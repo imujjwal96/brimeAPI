@@ -25,4 +25,8 @@ class Auth {
             return base64_decode($content["data"]);
         }
     }
+
+    public static function setResponse($code) {
+        http_response_code($code);
+    }
 }

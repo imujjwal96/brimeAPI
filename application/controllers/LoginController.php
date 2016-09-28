@@ -12,8 +12,10 @@ class LoginController extends Controller {
             $password = $_POST['p']; // The hashed password.
 
             if (LoginModel::login($email, $password)) {
+                http_response_code(200);
                 $message = 'Logged in';
             } else {
+                http_response_code(400);
                 $message = 'Incorect details';
             }
         }
