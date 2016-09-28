@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d54a0d2-fc73-4334-9829-f14150adbe33" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/core/Mail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/config.php" afterPath="$PROJECT_DIR$/application/config/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/RegisterController.php" afterPath="$PROJECT_DIR$/application/controllers/RegisterController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/RegisterModel.php" afterPath="$PROJECT_DIR$/application/models/RegisterModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/UserModel.php" afterPath="$PROJECT_DIR$/application/models/UserModel.php" />
     </list>
     <ignored path="brimeAPI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,11 +41,11 @@
       <file leaf-file-name="RegisterModel.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/RegisterModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
               <folding>
-                <marker date="1475076080140" expanded="true" signature="190:252" ph="INSERT INTO users... " />
-                <marker date="1475076080140" expanded="true" signature="2690:2819" ph="UPDATE users... " />
+                <marker date="1475076176122" expanded="true" signature="190:252" ph="INSERT INTO users... " />
+                <marker date="1475076176122" expanded="true" signature="2682:2811" ph="UPDATE users... " />
               </folding>
             </state>
           </provider>
@@ -311,12 +306,12 @@
       <workItem from="1475055844405" duration="1784000" />
       <workItem from="1475062636546" duration="4814000" />
       <workItem from="1475071395779" duration="236000" />
-      <workItem from="1475073705565" duration="2389000" />
+      <workItem from="1475073705565" duration="2475000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37757000" />
+    <option name="totallyTimeSpent" value="37843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="976" height="1038" extended-state="0" />
@@ -423,8 +418,8 @@
         <state relative-caret-position="391">
           <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
           <folding>
-            <marker date="1475076080140" expanded="true" signature="190:252" ph="INSERT INTO users... " />
-            <marker date="1475076080140" expanded="true" signature="2690:2819" ph="UPDATE users... " />
+            <marker date="1475076176122" expanded="true" signature="190:252" ph="INSERT INTO users... " />
+            <marker date="1475076176122" expanded="true" signature="2682:2811" ph="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -487,8 +482,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1475076080140" expanded="true" signature="190:252" ph="INSERT INTO users... " />
-            <marker date="1475076080140" expanded="true" signature="2690:2819" ph="UPDATE users... " />
+            <marker date="1475076176122" expanded="true" signature="190:252" ph="INSERT INTO users... " />
+            <marker date="1475076176122" expanded="true" signature="2682:2811" ph="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -741,14 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/core/Mail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/UserModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -762,13 +749,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/RegisterModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
           <folding>
-            <marker date="1475076080140" expanded="true" signature="190:252" ph="INSERT INTO users... " />
-            <marker date="1475076080140" expanded="true" signature="2690:2819" ph="UPDATE users... " />
+            <marker date="1475076176122" expanded="true" signature="190:252" ph="INSERT INTO users... " />
+            <marker date="1475076176122" expanded="true" signature="2682:2811" ph="UPDATE users... " />
           </folding>
         </state>
       </provider>

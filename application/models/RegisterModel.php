@@ -27,7 +27,7 @@ class RegisterModel {
     }
 
     public static function formValidation($userName, $email, $password, $passwordRepeat) {
-        if (self::validateUserName($userName) AND self::validateUserEmail($email) AND self::validateUserPassword($password, $passwordRepeat)) {
+        if (self::validateUserName($userName) AND self::validateEmail($email) AND self::validateUserPassword($password, $passwordRepeat)) {
             return true;
         }
 
@@ -79,7 +79,7 @@ class RegisterModel {
             . '/' . urlencode($userID) . '/' . urlencode($userActivationHash);
 
         $mail = new Mail;
-        $mailSent = $mail->sendMail($userEmail, Config::get('EMAIL_VERIFICATION_FROM_EMAIL'),
+        $mailSent = $mail->send($userEmail, Config::get('EMAIL_VERIFICATION_FROM_EMAIL'),
             Config::get('EMAIL_VERIFICATION_FROM_NAME'), Config::get('EMAIL_VERIFICATION_SUBJECT'), $body
         );
 
