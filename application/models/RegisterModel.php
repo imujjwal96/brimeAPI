@@ -2,7 +2,7 @@
 
 class RegisterModel {
 
-    public static function registerNewUser($userName, $email, $password, $passwordRepeat) {
+    public static function registerNewUser($userName, $email, $password) {
         $database = DatabaseFactory::getFactory()->getConnection();
 
         $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
@@ -10,7 +10,20 @@ class RegisterModel {
         $query->execute(array(
             ':email' => $email,
             ':password' => $password));
-        return true;
+
+        $userID = UserModel::getUserByUsername($userName)->id;
+
+        if (!$userID) {
+            return false;
+        }
+
+        $userVerificationCode = sha1(uniqid(mt_rand(), true));
+
+        if (self::sendVerificationEmail($userID, $email, $userVerificationCode)) {
+            return true;
+        }
+
+        return false;
     }
 
     public static function formValidation($userName, $email, $password, $passwordRepeat) {
@@ -59,5 +72,36 @@ class RegisterModel {
         }
 
         return true;
+    }
+
+    public static function sendVerificationEmail($userID, $userEmail, $userActivationHash) {
+        $body = Config::get('EMAIL_VERIFICATION_CONTENT') . Config::get('URL') . Config::get('EMAIL_VERIFICATION_URL')
+            . '/' . urlencode($userID) . '/' . urlencode($userActivationHash);
+
+        $mail = new Mail;
+        $mailSent = $mail->sendMail($userEmail, Config::get('EMAIL_VERIFICATION_FROM_EMAIL'),
+            Config::get('EMAIL_VERIFICATION_FROM_NAME'), Config::get('EMAIL_VERIFICATION_SUBJECT'), $body
+        );
+
+        if ($mailSent) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function verifyNewUser($userID, $userVerificationCode) {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "UPDATE users SET verified = 1, email_hash = NULL
+                WHERE id = :userID AND emai_hash = :userVerificationCode LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':userID' => $userID, ':userVerificationCode' => $userVerificationCode));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -23,7 +23,7 @@ class RegisterController extends Controller {
                 $hash = md5(sha1(md5(sha1($email))));
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
-                if (RegisterModel::registerNewUser($userName, $email, $password, $passwordRepeat)) {
+                if (RegisterModel::registerNewUser($userName, $email, $password)) {
                     http_response_code(200);
                     $message = 'Registered Successfully';
                 } else {

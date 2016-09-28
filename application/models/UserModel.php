@@ -26,4 +26,17 @@ class UserModel {
         }
         return false;
     }
+
+    public static function getUserByUsername($userName) {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $query = $database->prepare($sql);
+        $query->execute(array(':username' => $userName));
+
+        if ($query->rowCount() == 1) {
+            return $query->fetch();
+        }
+        return false;
+    }
 }
