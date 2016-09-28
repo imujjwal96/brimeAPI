@@ -12,6 +12,10 @@ class LoginModel {
             return false;
         }
 
+        if ($result->verifed != 1) {
+            return false;
+        }
+
         if (!password_verify($password, $result->password)) {
             return false;
         }

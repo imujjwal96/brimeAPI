@@ -7,13 +7,14 @@ class RegisterController extends Controller {
     }
 
     public function index() {
+        $message = "Wrong place at the wrong time.";
         if (isset($_POST['email'], $_POST['p'])) {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $userName = strip_tags($_POST['username']);
             $password = strip_tags($_POST["password"]);
             $passwordRepeat = strip_tags($_POST["passwordRepeat"]);
             if (!RegisterModel::formValidation($userName, $email, $password, $passwordRepeat)) {
-                http_response_code(400);
+                Auth::setResponse(400);
                 $this->View->renderJSON(array(
                     'message' => 'Invalid Credentials'
                 ));
@@ -24,7 +25,7 @@ class RegisterController extends Controller {
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
                 if (RegisterModel::registerNewUser($userName, $email, $password)) {
-                    http_response_code(200);
+                    Auth::setResponse(200);
                     $message = 'Registered Successfully';
                 } else {
                     $message = 'Error with the database.';
@@ -32,6 +33,21 @@ class RegisterController extends Controller {
             } else {
                 $message = 'User with email: ' . filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) . ' already exists.';
             }
+        }
+        $this->View->renderJSON(array(
+            'message' => $message
+        ));
+    }
+
+    public function verify($userID, $userVerificationCode)
+    {
+        if (isset($userID) && isset($userVerificationCode)) {
+            RegisterModel::verifyNewUser($userID, $userVerificationCode);
+            Auth::setResponse(200);
+            $message = 'Verified';
+        } else {
+            Auth::setResponse(400);
+            $message = "Wrong place at the wrong time.";
         }
         $this->View->renderJSON(array(
             'message' => $message
