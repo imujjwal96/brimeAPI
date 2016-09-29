@@ -3,6 +3,7 @@
 class DatabaseFactory {
     private static $factory;
     private $database;
+    private $databaseNotes;
 
     public static function getFactory() {
         if (!self::$factory) {
@@ -33,5 +34,13 @@ class DatabaseFactory {
             }
         }
         return $this->database;
+    }
+
+    public function getConnectionNotes() {
+        if (!$this->databaseNotes) {
+            $connection = new MongoClient();
+            $this->databaseNotes = $connection->selectDB(Config::get('NOTES_DB_NAME'));
+        }
+        return $this->databaseNotes;
     }
 }

@@ -20,6 +20,10 @@ return array(
     'DB_PORT' => '3306',
     'DB_CHARSET' => 'utf8',
 
+    'NOTES_DB_TYPE' => 'mongodb',
+    'NOTES_DB_NAME' => 'brime_notes',
+
+
     'EMAIL_USED_MAILER' => 'phpmailer',
     'EMAIL_USE_SMTP' => false,
     'EMAIL_SMTP_HOST' => '',
