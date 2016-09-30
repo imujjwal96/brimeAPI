@@ -7,6 +7,7 @@ class LoginController extends Controller {
     }
 
     public function index() {
+        $message = 'Wrong place at the wrong time.';
         if (isset($_POST['email']) AND isset($_POST['p'])) {
             $email = $_POST['email'];
             $password = $_POST['p']; // The hashed password.

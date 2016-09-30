@@ -42,18 +42,44 @@ class UserController extends Controller {
         }
     }
 
-    public function notes($access="public") {
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            http_response_code(401);
-            $this->View->renderJSON(array(
-                'message' => "Requires Authentication"
-            ));
-        } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if ($access == "public") {
-                // Render Public Notes
-            } elseif ($access == "private") {
-                // Render Private Notes
+    public function notes() {
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        if ($method == 'GET') {
+            if (Auth::content()["type"] == "Basic") {
+                $authValue = explode(':', Auth::decrypt());
+
+                $userInfo = UserModel::getUserByEmail($authValue[0]);
+                if ($userInfo != false) {
+                    if (password_verify($authValue[1], $userInfo->password)) {
+                        $notes = NotesModel::getAllNotes($userInfo->id);
+                        Auth::setResponse(200);
+                        $this->View->renderJSON($notes);
+                    } else {
+                        http_response_code(400);
+                        $this->View->renderJSON(array(
+                            'message' => "Incorrect authentication."
+                        ));
+                    }
+                } else {
+                    Auth::setResponse(404);
+                    $this->View->renderJSON(array(
+                        'message' => "No such user"
+                    ));
+                }
+
+            } else {
+                Auth::setResponse(401);
+                $this->View->renderJSON(array(
+                    'message' => "Requires Authentication"
+                ));
             }
+        } elseif ($method == 'POST') {
+            // Add note
+        } elseif ($method == 'DELETE') {
+            // Delete note
+        } elseif ($method == 'PUT') {
+            // Update note
         }
     }
 }
