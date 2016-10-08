@@ -1,0 +1,16 @@
+{
+    "name": "imujjwal96/brime-api",
+    "description": "brimeAPI is an open source API of a simple and powerful self-hosted note taking application that lets organizations to have an increased privacy by host their notes on their own server.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ujjwal Bhardwaj",
+            "email": "ujjwalb1996@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^5.2",
+        "mongodb/mongodb": "^1.0"
+    }
+}

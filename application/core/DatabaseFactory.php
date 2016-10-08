@@ -26,7 +26,7 @@ class DatabaseFactory {
 
                 // Echo custom message. Echo error code gives you some info.
                 echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
-                echo 'Error code: ' . $e->getCode();
+                echo 'Error code: ' . $e->getCode() . ' ' . $e->getMessage();
 
                 // Stop application :(
                 // No connection, reached limit connections etc. so no point to keep it running
@@ -38,8 +38,8 @@ class DatabaseFactory {
 
     public function getConnectionNotes() {
         if (!$this->databaseNotes) {
-            $connection = new MongoClient();
-            $this->databaseNotes = $connection->selectDB(Config::get('NOTES_DB_NAME'));
+            $connection = new MongoDB\Client("mongodb://localhost:27017");
+            $this->databaseNotes = $connection->selectDatabase(Config::get('NOTES_DB_NAME'));
         }
         return $this->databaseNotes;
     }

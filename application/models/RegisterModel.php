@@ -5,9 +5,10 @@ class RegisterModel {
     public static function registerNewUser($userName, $email, $password) {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
         $query = $database->prepare($sql);
         $query->execute(array(
+            ':username' => $userName,
             ':email' => $email,
             ':password' => $password));
 
