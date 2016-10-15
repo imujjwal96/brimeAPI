@@ -52,7 +52,7 @@ class UserController extends Controller {
                 $userInfo = UserModel::getUserByEmail($authValue[0]);
                 if ($userInfo != false) {
                     if (password_verify($authValue[1], $userInfo->password)) {
-                        $notes = NotesModel::getAllNotes($userInfo->id);
+                        $notes = NotesModel::getNotesByUser($userInfo->id);
                         Auth::setResponse(200);
                         $this->View->renderJSON($notes);
                     } else {

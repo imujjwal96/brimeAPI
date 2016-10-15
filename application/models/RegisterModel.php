@@ -1,16 +1,21 @@
 <?php
-
+// Include function for unique username
 class RegisterModel {
 
     public static function registerNewUser($userName, $email, $password) {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $activationHash = sha1(uniqid(mt_rand(), true));
+
+        $sql = "INSERT INTO users (username, email, password, created_timestamp, activation_hash) VALUES (:username, :email, :password, :created_timestamp, :activation_hash)";
         $query = $database->prepare($sql);
         $query->execute(array(
             ':username' => $userName,
             ':email' => $email,
-            ':password' => $password));
+            ':password' => $password,
+            ':created_timestamp' => time(),
+            ':activation_hash' => $activationHash
+        ));
 
         $userID = UserModel::getUserByUsername($userName)->id;
 
@@ -18,9 +23,8 @@ class RegisterModel {
             return false;
         }
 
-        $userVerificationCode = sha1(uniqid(mt_rand(), true));
 
-        if (self::sendVerificationEmail($userID, $email, $userVerificationCode)) {
+        if (self::sendVerificationEmail($userID, $email, $activationHash)) {
             return true;
         }
 
@@ -94,10 +98,13 @@ class RegisterModel {
     public static function verifyNewUser($userID, $userVerificationCode) {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE users SET verified = 1, email_hash = NULL
-                WHERE id = :userID AND emai_hash = :userVerificationCode LIMIT 1";
+        $sql = "UPDATE users SET verified = 1, activation_hash = NULL
+                WHERE id = :userID AND activation_hash = :userVerificationCode LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':userID' => $userID, ':userVerificationCode' => $userVerificationCode));
+        $query->execute(array(
+            ':userID' => $userID,
+            ':userVerificationCode' => $userVerificationCode
+        ));
 
         if ($query->rowCount() == 1) {
             return true;
