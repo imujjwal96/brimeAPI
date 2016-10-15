@@ -12,12 +12,14 @@ class LoginController extends Controller {
             $email = $_POST['email'];
             $password = $_POST['p']; // The hashed password.
 
-            if (LoginModel::login($email, $password)) {
+            $loginSuccessful = LoginModel::login($email, $password);
+
+            if ($loginSuccessful === true) {
                 http_response_code(200);
                 $message = 'Logged in';
             } else {
                 http_response_code(400);
-                $message = 'Incorect details';
+                $message = $loginSuccessful;
             }
         }
         $this->View->renderJSON(array(

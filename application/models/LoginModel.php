@@ -4,20 +4,20 @@ class LoginModel {
 
     public static function login($email, $password) {
         if(empty($email) OR empty($password)) {
-            return false;
+            return "Empty Email or Password";
         }
 
         $result = UserModel::getUserByEmail($email);
         if (!$result) {
-            return false;
+            return "Could not find user with the given username";
         }
 
-        if ($result->verifed != 1) {
-            return false;
+        if ($result->verified != 1) {
+            return "user is not verified";
         }
 
         if (!password_verify($password, $result->password)) {
-            return false;
+            return "password does not match";
         }
 
         return true;
