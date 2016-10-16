@@ -1,8 +1,24 @@
 <?php
 
 class NotesModel {
-    public static function addNote() {
+    public static function addNote($title, $content, $label, $author) {
+        $database = DatabaseFactory::getFactory()->getConnectionNotes();
 
+        $notes = $database->selectCollection('notes');
+
+        $document = array(
+            "title" => $title,
+            "content" => $content,
+            "label" => $label,
+            "author" => $author,
+            "created_at" => (new MongoDB\BSON\UTCDateTime(time()))->toDateTime(),
+            "edited_at" => (new MongoDB\BSON\UTCDateTime(time()))->toDateTime()
+        );
+
+        if ($notes->insertOne($document)) {
+            return true;
+        }
+        return false;
     }
 
     public static function editNote() {
