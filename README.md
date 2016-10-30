@@ -1,5 +1,6 @@
 # brimeAPI
 
+[![Join the chat at https://gitter.im/Brime-app/Lobby](https://badges.gitter.im/Brime-app/Lobby.svg)](https://gitter.im/Brime-app/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Show User (GET /user)**
 ----
