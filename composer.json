@@ -1,6 +1,49 @@
 {
+    "name": "imujjwal96/brimeAPI",
+    "description": "RESTful API for Brime App",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ujjwal Bhardwaj",
+            "email": "ujjwalb1996@gmail.com"
+        }
+    ],
     "require": {
         "slim/slim": "^3.0",
         "slim/twig-view": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brime\\": "Application"
+        }
+    }
+}
+
+
+
+{
+    "name": "imujjwal96/prelim-quiz",
+    "description": "prelimQuiz is an open source, simple and powerful self-hosted quiz platform with the backend of Object Oriented PHP that lets an organiser host a quiz either on a local server or in the cloud.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ujjwal Bhardwaj",
+            "email": "ujjwalb1996@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "5.5.*",
+        "mongodb/mongodb": "1.1.0-alpha1"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\Core\\": "Application/Core/",
+            "Application\\Models\\": "Application/Models/"
+        }
     }
 }
