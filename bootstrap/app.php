@@ -25,4 +25,8 @@ $container["view"] = function ($container) {
     return $view;
 };
 
+$container["HomeController"] = function ($container) {
+    return new \Brime\Controllers\HomeController($container);
+};
+
 require __DIR__ . '/../Application/routes.php';
