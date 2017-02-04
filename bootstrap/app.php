@@ -58,6 +58,10 @@ $container["AuthController"] = function ($container) {
     return new \Brime\Controllers\Auth\AuthController($container);
 };
 
+$container["auth"] = function ($container) {
+    return new \Brime\Auth\Auth;
+};
+
 v::with('Brime\\Validation\\Rules\\');
 
 require __DIR__ . '/../Application/routes.php';

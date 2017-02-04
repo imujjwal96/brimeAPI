@@ -8,6 +8,34 @@ use Respect\Validation\Validator as v;
 
 class AuthController extends Controller
 {
+    public function getSignIn($request, $response)
+    {
+        return $this->view->render($response, 'auth/signin.twig');
+    }
+
+    public function postSignIn($request, $response)
+    {
+        $validation = $this->validator->validate($request, [
+            'email' => v::noWhitespace()->notEmpty()->email(),
+            'password' => v::noWhitespace()->notEmpty(),
+        ]);
+
+        $auth = $this->auth->attempt(
+            $request->getParam('email'),
+            $request->getParam('p')
+        );
+
+        if (!$auth) {
+            return $response->withJson(array(
+                "message" => "Invalid email or password"
+            ), 400);
+        }
+
+        return $response->withJson(array(
+            "message" => "Login successful."
+        ), 200);
+    }
+
     public function getSignUp($request, $response)
     {
         return $this->view->render($response, 'auth/signup.twig');
@@ -22,7 +50,7 @@ class AuthController extends Controller
         ]);
 
         if ($validation->failed()) {
-            return $this->view->render($response, 'auth/signup.twig');
+            return $response->withJson($validation->getErrors(), 400);
         }
 
         $user = User::create([
@@ -31,5 +59,8 @@ class AuthController extends Controller
             'username' => $request->getParam('username')
         ]);
 
+        return $response->withJson(array(
+            "message" => "Signup successful."
+        ), 200);
     }
 }
