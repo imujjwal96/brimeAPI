@@ -1,5 +1,7 @@
 <?php
 
+use Respect\Validation\Validator as v;
+
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -44,8 +46,18 @@ $container["view"] = function ($container) {
     return $view;
 };
 
+$container['validator'] = function ($container) {
+    return new Brime\Validation\Validator;
+};
+
 $container["HomeController"] = function ($container) {
     return new \Brime\Controllers\HomeController($container);
 };
+
+$container["AuthController"] = function ($container) {
+    return new \Brime\Controllers\Auth\AuthController($container);
+};
+
+v::with('Brime\\Validation\\Rules\\');
 
 require __DIR__ . '/../Application/routes.php';
