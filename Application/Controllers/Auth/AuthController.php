@@ -10,7 +10,9 @@ class AuthController extends Controller
 {
     public function getSignIn($request, $response)
     {
-        return $this->view->render($response, 'auth/signin.twig');
+        return $response->withJson(array(
+            "message" => "Requires authentication"
+        ), 401);
     }
 
     public function postSignIn($request, $response)
@@ -27,7 +29,7 @@ class AuthController extends Controller
 
         if (!$auth) {
             return $response->withJson(array(
-                "message" => "Invalid email or password"
+                "errors" => "Invalid email or password"
             ), 400);
         }
 
@@ -38,7 +40,9 @@ class AuthController extends Controller
 
     public function getSignUp($request, $response)
     {
-        return $this->view->render($response, 'auth/signup.twig');
+        return $response->withJson(array(
+            "message" => "Requires authentication"
+        ), 401);
     }
 
     public function postSignUp($request, $response)
@@ -50,7 +54,9 @@ class AuthController extends Controller
         ]);
 
         if ($validation->failed()) {
-            return $response->withJson($validation->getErrors(), 400);
+            return $response->withJson(array(
+                "errors" => $validation->getErrors()
+            ), 400);
         }
 
         $user = User::create([
