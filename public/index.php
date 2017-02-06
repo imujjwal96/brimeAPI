@@ -1,6 +1,5 @@
 <?php
 
-require '../vendor/autoload.php';
-require_once '../application/init.php';
+require __DIR__ . '/../bootstrap/app.php';
 
-$application = new Application();
+$app->run();
