@@ -1,6 +1,5 @@
-
 # brimeAPI (LEGACY)
-
+Legacy API for BrimeNotes
 
 **Show User (GET /user)**
 ----
